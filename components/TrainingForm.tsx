@@ -83,6 +83,8 @@ export default function TrainingForm({ onSubmit, savedDays }: { onSubmit: Dispat
     const handleSubmit = async (event: { preventDefault: () => void }) => {
         event.preventDefault()
 
+        const apiKey = process.env.OPENAI_API_KEY
+
         if (!loaded) return alert('Please wait for the previous request to finish')
 
         // if any of the fields are empty, don't submit
@@ -91,9 +93,6 @@ export default function TrainingForm({ onSubmit, savedDays }: { onSubmit: Dispat
         setLoaded(false)
 
         try {
-            // Set your API key
-            const apiKey = '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'
-
             // Set the request parameters
             const params = {
                 model: 'text-davinci-002',
