@@ -3,7 +3,7 @@
 @import 'tailwindcss/utilities';
 
 body, html {
-  background: rgb(55 65 8);
+  background: rgb(55 65 81);
   width: 100vw;
   height: 100vh;
   overflow: auto;
