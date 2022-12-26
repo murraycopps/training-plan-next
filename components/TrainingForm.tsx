@@ -43,7 +43,21 @@ function getDays(text: string) {
                     });
                 } else if (workoutType === 'long' || workoutType === 'Long') {
                     const workoutText = line.split(': ')[1] + ': ' + line.split(': ')[2]
-                    const mileage = line.split(': ')[line.split(': ').length - 1];
+
+                    // create an array storing all the words in mileage and set mileage to the number in the array
+                    const mileageArray = line.split(' ')
+
+                    const mileage = mileageArray.find(element => !isNaN(Number(element)))
+                    if (!mileage) {
+                        result.push({
+                            day: day.trim(),
+                            workout: workoutText.trim(),
+                            mileage: 0,
+                            originalText: line
+                        })
+                        continue
+                    }
+
                     result.push({
                         day: day.trim(),
                         workout: workoutText.trim(),
@@ -51,7 +65,12 @@ function getDays(text: string) {
                         originalText: line
                     });
                 } else {
-                    const mileage = workout.split(' ')[0];
+
+                    // create an array storing all the words in mileage and set mileage to the number in the array
+                    const mileageArray = line.split(' ')
+
+                    const mileage = mileageArray.find(element => !isNaN(Number(element)))
+                    
                     if (!mileage) return [];
 
                     result.push({
@@ -223,11 +242,11 @@ export default function TrainingForm({ onSubmit, savedDays, apiKey }: { onSubmit
                 <div className="mb-4">
                     <label className="block text-gray-300 text-sm font-bold mb-2">
                         Rest Days:
-                        <input 
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-500 leading-tight focus:outline-none focus:shadow-outline" 
-                        type="text" 
-                        value={restDays} 
-                        onChange={(event) => setRestDays(event.target.value)} 
+                        <input
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-500 leading-tight focus:outline-none focus:shadow-outline"
+                            type="text"
+                            value={restDays}
+                            onChange={(event) => setRestDays(event.target.value)}
                         />
                     </label>
                 </div>
