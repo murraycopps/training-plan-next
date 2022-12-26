@@ -71,7 +71,7 @@ function getDays(text: string) {
 
 
 
-export default function TrainingForm({ onSubmit, savedDays }: { onSubmit: Dispatch<SetStateAction<Day[]>>, savedDays: SavedDays[] }) {
+export default function TrainingForm({ onSubmit, savedDays, apiKey }: { onSubmit: Dispatch<SetStateAction<Day[]>>, savedDays: SavedDays[], apiKey: string }) {
     const [experience, setExperience] = useState('')
     const [age, setAge] = useState('')
     const [normalMilage, setNormalMilage] = useState('')
@@ -82,8 +82,6 @@ export default function TrainingForm({ onSubmit, savedDays }: { onSubmit: Dispat
 
     const handleSubmit = async (event: { preventDefault: () => void }) => {
         event.preventDefault()
-
-        const apiKey = process.env.OPENAI_API_KEY
 
         if (!loaded) return alert('Please wait for the previous request to finish')
 
